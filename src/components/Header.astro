@@ -42,11 +42,12 @@ const links = [
       </a>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 text-brand-800 hover:bg-brand-100 rounded-full transition-colors relative z-50">
+      <button id="mobile-menu-btn" class="md:hidden flex items-center gap-2 p-2 text-brand-800 hover:bg-brand-100 rounded-full transition-all relative z-50">
+        <span id="menu-text" class="text-xs font-bold uppercase tracking-wider hidden">Sluiten</span>
         <div class="w-6 h-5 flex flex-col justify-between">
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-left"></span>
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300"></span>
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-left"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
         </div>
       </button>
     </div>
@@ -81,7 +82,7 @@ const links = [
   const headerContainer = document.getElementById('header-container');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const mobileMenuText = document.getElementById('menu-text');
   let isMenuOpen = false;
 
   window.addEventListener('scroll', () => {
@@ -105,6 +106,7 @@ const links = [
     if (isMenuOpen) {
       mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
       mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+      mobileMenuText?.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       
       // Animate Links
@@ -113,7 +115,7 @@ const links = [
       });
       
       // Animate Hamburger to X
-      const spans = mobileMenuBtn?.querySelectorAll('span');
+      const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
       if (spans) {
         spans[0].classList.add('rotate-45', 'translate-y-2.25');
         spans[1].classList.add('opacity-0');
@@ -123,6 +125,7 @@ const links = [
     } else {
       mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
       mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+      mobileMenuText?.classList.add('hidden');
       document.body.style.overflow = '';
       
       // Reset Links
@@ -131,7 +134,7 @@ const links = [
       });
 
       // Reset Hamburger
-      const spans = mobileMenuBtn?.querySelectorAll('span');
+      const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
       if (spans) {
         spans[0].classList.remove('rotate-45', 'translate-y-2.25');
         spans[1].classList.remove('opacity-0');
