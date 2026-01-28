@@ -42,34 +42,41 @@ const links = [
       </a>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden flex items-center gap-2 p-2 text-brand-800 hover:bg-brand-100 rounded-full transition-all relative z-50">
-        <span id="menu-text" class="text-xs font-bold uppercase tracking-wider hidden">Sluiten</span>
+      <button id="mobile-menu-btn" class="md:hidden flex items-center p-2 text-brand-800 hover:bg-brand-100 rounded-full transition-all relative z-50">
         <div class="w-6 h-5 flex flex-col justify-between">
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
-          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-center"></span>
+          <span class="w-full h-0.5 bg-current"></span>
+          <span class="w-full h-0.5 bg-current"></span>
+          <span class="w-full h-0.5 bg-current"></span>
         </div>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed inset-0 bg-brand-50 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+  <div id="mobile-menu" class="fixed inset-0 bg-brand-50 z-50 flex flex-col items-center justify-center translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+     <!-- Close Button -->
+     <div class="absolute top-8 right-8">
+       <button id="close-menu-btn" class="p-3 text-brand-900 hover:bg-white rounded-full transition-all shadow-sm">
+         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+         </svg>
+       </button>
+     </div>
+
      <!-- Decorative floral bg -->
      <div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('/images/photo-1.webp')] bg-cover bg-center grayscale"></div>
      
-     <nav class="flex flex-col gap-6 text-center space-y-4">
+     <nav class="flex flex-col gap-6 text-center space-y-4 relative z-10">
       {links.map((link, i) => (
         <a 
           href={link.href} 
-          class={`mobile-link text-4xl font-display font-medium text-brand-900 hover:text-brand-500 transition-colors transform translate-y-4 opacity-0 ${link.class || ''}`}
-          style={`transition-delay: ${i * 100}ms`}
+          class={`mobile-link text-4xl font-display font-medium text-brand-900 hover:text-brand-500 transition-colors ${link.class || ''}`}
           data-menu-tab={link.data}
         >
           {link.name}
         </a>
       ))}
-      <a href="#reservation" class="mt-8 px-8 py-4 bg-brand-900 text-white rounded-full text-xl shadow-xl mobile-link opacity-0 translate-y-4" style="transition-delay: 600ms">
+      <a href="#reservation" class="mobile-link mt-8 px-8 py-4 bg-brand-900 text-white rounded-full text-xl shadow-xl">
         Nu Reserveren
       </a>
     </nav>
@@ -78,71 +85,53 @@ const links = [
 
 
 <script>
-  const header = document.getElementById('main-header');
-  const headerContainer = document.getElementById('header-container');
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-  const mobileMenuText = document.getElementById('menu-text');
-  let isMenuOpen = false;
+  function setupHeader() {
+    const header = document.getElementById('main-header');
+    const headerContainer = document.getElementById('header-container');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header?.classList.remove('top-6');
-      header?.classList.add('top-2');
-      headerContainer?.classList.add('py-2', 'px-6', 'bg-white/90');
-      headerContainer?.classList.remove('py-3', 'px-8', 'bg-white/80');
-    } else {
-      header?.classList.add('top-6');
-      header?.classList.remove('top-2');
-      headerContainer?.classList.remove('py-2', 'px-6', 'bg-white/90');
-      headerContainer?.classList.add('py-3', 'px-8', 'bg-white/80');
-    }
-  });
-
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-      mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
-      mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
-      mobileMenuText?.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      
-      mobileLinks.forEach(link => {
-        link.classList.remove('translate-y-4', 'opacity-0');
-      });
-      
-      const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
-      if (spans && spans.length === 3) {
-        spans[0].classList.add('rotate-45', 'translate-y-2.25');
-        spans[1].classList.add('opacity-0');
-        spans[2].classList.add('-rotate-45', '-translate-y-2.25');
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header?.classList.remove('top-6');
+        header?.classList.add('top-2');
+        headerContainer?.classList.add('py-2', 'px-6', 'bg-white/95');
+        headerContainer?.classList.remove('py-3', 'px-8', 'bg-white/80');
+      } else {
+        header?.classList.add('top-6');
+        header?.classList.remove('top-2');
+        headerContainer?.classList.remove('py-2', 'px-6', 'bg-white/95');
+        headerContainer?.classList.add('py-3', 'px-8', 'bg-white/80');
       }
-    } else {
-      mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
-      mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
-      mobileMenuText?.classList.add('hidden');
-      document.body.style.overflow = '';
-      
-      mobileLinks.forEach(link => {
-        link.classList.add('translate-y-4', 'opacity-0');
-      });
+    });
 
-      const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
-      if (spans && spans.length === 3) {
-        spans[0].classList.remove('rotate-45', 'translate-y-2.25');
-        spans[1].classList.remove('opacity-0');
-        spans[2].classList.remove('-rotate-45', '-translate-y-2.25');
+    function toggleMenu() {
+      const isOpen = !mobileMenu?.classList.contains('translate-x-full');
+      if (isOpen) {
+        mobileMenu?.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      } else {
+        mobileMenu?.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
       }
     }
+
+    mobileMenuBtn?.addEventListener('click', toggleMenu);
+    closeMenuBtn?.addEventListener('click', toggleMenu);
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (!mobileMenu?.classList.contains('translate-x-full')) {
+          toggleMenu();
+        }
+      });
+    });
   }
 
-  mobileMenuBtn?.addEventListener('click', toggleMenu);
-
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (isMenuOpen) toggleMenu();
-    });
-  });
+  // Run on initial load and after view transitions
+  setupHeader();
+  document.addEventListener('astro:page-load', setupHeader);
 </script>
