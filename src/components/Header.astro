@@ -98,7 +98,7 @@ const links = [
     }
   });
 
-  mobileMenuBtn?.addEventListener('click', () => {
+  function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     
     // Toggle Menu Visibility
@@ -112,11 +112,13 @@ const links = [
         link.classList.remove('translate-y-4', 'opacity-0');
       });
       
-      // Animate Hamburger
-      const spans = mobileMenuBtn.querySelectorAll('span');
-      spans[0].classList.add('rotate-45', 'translate-y-2');
-      spans[1].classList.add('opacity-0');
-      spans[2].classList.add('-rotate-45', '-translate-y-2');
+      // Animate Hamburger to X
+      const spans = mobileMenuBtn?.querySelectorAll('span');
+      if (spans) {
+        spans[0].classList.add('rotate-45', 'translate-y-2.25');
+        spans[1].classList.add('opacity-0');
+        spans[2].classList.add('-rotate-45', '-translate-y-2.25');
+      }
       
     } else {
       mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
@@ -129,10 +131,21 @@ const links = [
       });
 
       // Reset Hamburger
-      const spans = mobileMenuBtn.querySelectorAll('span');
-      spans[0].classList.remove('rotate-45', 'translate-y-2');
-      spans[1].classList.remove('opacity-0');
-      spans[2].classList.remove('-rotate-45', '-translate-y-2');
+      const spans = mobileMenuBtn?.querySelectorAll('span');
+      if (spans) {
+        spans[0].classList.remove('rotate-45', 'translate-y-2.25');
+        spans[1].classList.remove('opacity-0');
+        spans[2].classList.remove('-rotate-45', '-translate-y-2.25');
+      }
     }
+  }
+
+  mobileMenuBtn?.addEventListener('click', toggleMenu);
+
+  // Close menu when clicking a link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMenuOpen) toggleMenu();
+    });
   });
 </script>
