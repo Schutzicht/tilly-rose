@@ -82,6 +82,7 @@ const links = [
   const headerContainer = document.getElementById('header-container');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
   const mobileMenuText = document.getElementById('menu-text');
   let isMenuOpen = false;
 
@@ -102,40 +103,34 @@ const links = [
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     
-    // Toggle Menu Visibility
     if (isMenuOpen) {
       mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
       mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
       mobileMenuText?.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       
-      // Animate Links
       mobileLinks.forEach(link => {
         link.classList.remove('translate-y-4', 'opacity-0');
       });
       
-      // Animate Hamburger to X
       const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
-      if (spans) {
+      if (spans && spans.length === 3) {
         spans[0].classList.add('rotate-45', 'translate-y-2.25');
         spans[1].classList.add('opacity-0');
         spans[2].classList.add('-rotate-45', '-translate-y-2.25');
       }
-      
     } else {
       mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
       mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
       mobileMenuText?.classList.add('hidden');
       document.body.style.overflow = '';
       
-      // Reset Links
       mobileLinks.forEach(link => {
         link.classList.add('translate-y-4', 'opacity-0');
       });
 
-      // Reset Hamburger
       const spans = mobileMenuBtn?.querySelectorAll('span:not(#menu-text)');
-      if (spans) {
+      if (spans && spans.length === 3) {
         spans[0].classList.remove('rotate-45', 'translate-y-2.25');
         spans[1].classList.remove('opacity-0');
         spans[2].classList.remove('-rotate-45', '-translate-y-2.25');
@@ -145,7 +140,6 @@ const links = [
 
   mobileMenuBtn?.addEventListener('click', toggleMenu);
 
-  // Close menu when clicking a link
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (isMenuOpen) toggleMenu();
