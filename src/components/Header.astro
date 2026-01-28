@@ -1,0 +1,138 @@
+---
+const links = [
+  { name: 'Home', href: '#' },
+  { name: 'Menu', href: '#menu', class: 'open-menu-modal', data: 'broodjes' },
+  { name: 'High Tea', href: '#hightea', class: 'open-menu-modal', data: 'hightea' },
+  { name: 'Over ons', href: '#about' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<header id="main-header" class="fixed top-6 left-0 right-0 z-50 transition-all duration-500 flex justify-center px-4">
+  <div 
+    id="header-container"
+    class="bg-white/80 backdrop-blur-xl border border-white/40 shadow-2xl rounded-full px-8 py-3 flex items-center gap-8 md:gap-12 transition-all duration-500 max-w-5xl w-full justify-between"
+  >
+    <!-- Logo -->
+    <a href="#" class="font-display text-2xl md:text-3xl font-bold tracking-tight text-brand-900 shrink-0 hover:scale-105 transition-transform">
+      Tilly Rose<span class="text-brand-400">.</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-1 bg-brand-50/50 p-1.5 rounded-full border border-brand-100/50">
+      {links.map(link => (
+        <a 
+          href={link.href} 
+          class={`px-5 py-2 rounded-full font-body text-sm font-medium text-brand-800 hover:bg-white hover:shadow-sm hover:text-brand-600 transition-all duration-300 ${link.class || ''}`}
+          data-menu-tab={link.data}
+        >
+          {link.name}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Action & Mobile Toggle -->
+    <div class="flex items-center gap-4">
+      <a 
+        href="#reservation" 
+        class="hidden sm:flex group relative overflow-hidden rounded-full bg-brand-900 px-6 py-2.5 text-brand-50 shadow-brand-900/20 shadow-lg hover:shadow-brand-900/40 transition-all hover:-translate-y-0.5"
+      >
+        <span class="relative z-10 font-medium text-sm tracking-wide">Reserveren</span>
+        <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-brand-500 transition-transform duration-300 ease-out"></div>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-brand-800 hover:bg-brand-100 rounded-full transition-colors relative z-50">
+        <div class="w-6 h-5 flex flex-col justify-between">
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-left"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300"></span>
+          <span class="w-full h-0.5 bg-current transform transition-all duration-300 origin-left"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-brand-50 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+     <!-- Decorative floral bg -->
+     <div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('/images/photo-1.webp')] bg-cover bg-center grayscale"></div>
+     
+     <nav class="flex flex-col gap-6 text-center space-y-4">
+      {links.map((link, i) => (
+        <a 
+          href={link.href} 
+          class={`mobile-link text-4xl font-display font-medium text-brand-900 hover:text-brand-500 transition-colors transform translate-y-4 opacity-0 ${link.class || ''}`}
+          style={`transition-delay: ${i * 100}ms`}
+          data-menu-tab={link.data}
+        >
+          {link.name}
+        </a>
+      ))}
+      <a href="#reservation" class="mt-8 px-8 py-4 bg-brand-900 text-white rounded-full text-xl shadow-xl mobile-link opacity-0 translate-y-4" style="transition-delay: 600ms">
+        Nu Reserveren
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+<script>
+  const header = document.getElementById('main-header');
+  const headerContainer = document.getElementById('header-container');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  let isMenuOpen = false;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.remove('top-6');
+      header?.classList.add('top-2');
+      headerContainer?.classList.add('py-2', 'px-6', 'bg-white/90');
+      headerContainer?.classList.remove('py-3', 'px-8', 'bg-white/80');
+    } else {
+      header?.classList.add('top-6');
+      header?.classList.remove('top-2');
+      headerContainer?.classList.remove('py-2', 'px-6', 'bg-white/90');
+      headerContainer?.classList.add('py-3', 'px-8', 'bg-white/80');
+    }
+  });
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    
+    // Toggle Menu Visibility
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+      mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+      document.body.style.overflow = 'hidden';
+      
+      // Animate Links
+      mobileLinks.forEach(link => {
+        link.classList.remove('translate-y-4', 'opacity-0');
+      });
+      
+      // Animate Hamburger
+      const spans = mobileMenuBtn.querySelectorAll('span');
+      spans[0].classList.add('rotate-45', 'translate-y-2');
+      spans[1].classList.add('opacity-0');
+      spans[2].classList.add('-rotate-45', '-translate-y-2');
+      
+    } else {
+      mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+      mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+      document.body.style.overflow = '';
+      
+      // Reset Links
+      mobileLinks.forEach(link => {
+        link.classList.add('translate-y-4', 'opacity-0');
+      });
+
+      // Reset Hamburger
+      const spans = mobileMenuBtn.querySelectorAll('span');
+      spans[0].classList.remove('rotate-45', 'translate-y-2');
+      spans[1].classList.remove('opacity-0');
+      spans[2].classList.remove('-rotate-45', '-translate-y-2');
+    }
+  });
+</script>

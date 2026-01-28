@@ -1,0 +1,119 @@
+<section id="contact" class="py-20 bg-brand-50 relative">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+       <span class="text-brand-500 font-bold tracking-widest uppercase text-sm">Contact & Reserveren</span>
+       <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mt-2">Kom gezellig langs</h2>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+      <!-- Left: Reservation Form -->
+      <div class="lg:w-3/5 order-2 lg:order-1">
+        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-100 rounded-bl-full -mr-16 -mt-16 opacity-50 transition-transform group-hover:scale-150 duration-700"></div>
+          
+          <h3 class="font-display text-2xl font-bold text-brand-900 mb-6 relative z-10">Reserveren of Aanvraag doen</h3>
+          
+          <form class="space-y-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div class="space-y-2">
+                <label class="text-sm font-bold text-brand-800 ml-1">Soort Bezoek</label>
+                <select class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900 appearance-none">
+                  <option>Lunch</option>
+                  <option>High Tea (Classic)</option>
+                  <option>High Tea (Luxury)</option>
+                  <option>High Tea (Kids)</option>
+                  <option>Borrel / Overig</option>
+                </select>
+               </div>
+               <div class="space-y-2">
+                <label class="text-sm font-bold text-brand-800 ml-1">Aantal Personen</label>
+                <input type="number" min="1" placeholder="2" class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+               </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div class="space-y-2">
+                <label class="text-sm font-bold text-brand-800 ml-1">Datum</label>
+                <input type="date" class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+               </div>
+               <div class="space-y-2">
+                <label class="text-sm font-bold text-brand-800 ml-1">Tijdstip</label>
+                <input type="time" class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+               </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-brand-800 ml-1">Uw Gegevens</label>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" placeholder="Naam" class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+                <input type="email" placeholder="E-mailadres" class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+              </div>
+              <input type="tel" placeholder="Telefoonnummer" class="w-full mt-4 bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900">
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-sm font-bold text-brand-800 ml-1">Opmerkingen / Dieetwensen</label>
+              <textarea rows="3" placeholder="Bijv. allergieën, speciale gelegenheid..." class="w-full bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all font-body text-brand-900"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-brand-600 text-white font-bold text-lg py-4 rounded-xl hover:bg-brand-500 hover:scale-[1.02] transform transition-all shadow-lg hover:shadow-brand-500/40">
+              Aanvraag Versturen
+            </button>
+            <p class="text-xs text-center text-gray-400 mt-2">Wij nemen zo snel mogelijk contact op om de reservering te bevestigen.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: Info & Map -->
+      <div class="lg:w-2/5 order-1 lg:order-2 space-y-8">
+        <!-- Info Card -->
+        <div class="bg-brand-900 text-white p-8 md:p-10 rounded-3xl shadow-xl relative overflow-hidden group">
+          <div class="absolute inset-0 bg-[url('/images/photo-2.webp')] bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-overlay"></div>
+          <div class="relative z-10 space-y-6">
+            <h3 class="font-display text-2xl font-bold mb-4 border-b border-brand-700 pb-4 inline-block">Contactgegevens</h3>
+            
+             <div class="flex items-start">
+              <svg class="w-6 h-6 mt-1 mr-4 text-brand-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <div>
+                <span class="block text-brand-200 text-sm font-bold uppercase tracking-wider">Adres</span>
+                <p class="text-lg">Oude Markt 10<br/>4381 ES Vlissingen</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <svg class="w-6 h-6 mt-1 mr-4 text-brand-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              <div>
+                <span class="block text-brand-200 text-sm font-bold uppercase tracking-wider">Bel ons</span>
+                <a href="tel:0118774203" class="text-lg hover:text-brand-300 transition-colors">0118-774203</a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <svg class="w-6 h-6 mt-1 mr-4 text-brand-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <div>
+                <span class="block text-brand-200 text-sm font-bold uppercase tracking-wider">Openingstijden</span>
+                <p class="text-brand-50">Di - Za: 10:00 - 17:00</p>
+                <p class="text-brand-50 text-sm">Koopzondag: 12:00 - 17:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="h-64 rounded-3xl overflow-hidden shadow-lg border-4 border-white">
+           <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2488.750567200763!2d3.5786884!3d51.4468642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c490a604294a21%3A0xe54b9f3231456578!2sTilly%20Rose!5e0!3m2!1sen!2snl!4v1700000000000!5m2!1sen!2snl" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="transition-all duration-700"
+          ></iframe>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

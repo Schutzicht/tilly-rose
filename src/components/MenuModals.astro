@@ -1,0 +1,190 @@
+---
+const menus = {
+  hightea: [
+    { name: "Classic High Tea", price: "24,50", desc: "Onbeperkt thee, scones met clotted cream & jam, diverse sandwiches, quiche, en een etagère vol zoetigheden." },
+    { name: "Luxury High Tea", price: "29,50", desc: "Onze Classic High Tea uitgebreid met een glas prosecco, bonbons en extra luxe hapjes." },
+    { name: "Kids High Tea", price: "14,50", desc: "Limonade, sandwiches met hagelslag/jam, versierde cupcakes en een verrassing." },
+    { name: "Babyshower High Tea", price: "27,50", desc: "Inclusief versiering in roze of blauw en beschuit met muisjes." }
+  ],
+  broodjes: [
+    { name: "Carpaccio", price: "12,50", desc: "Dungesneden ossenhaas, truffelmayonaise, pijnboompitten, parmezaan en rucola." },
+    { name: "Gerookte Zalm", price: "13,50", desc: "Met roomkaas, rode ui, kappertjes en dille." },
+    { name: "Geitenkaas", price: "11,50", desc: "Warm uit de oven met honing, walnoten en spekjes." },
+    { name: "Gezond", price: "9,50", desc: "Kaas, ham, ei, komkommer, tomaat en frisse dressing." },
+    { name: "Hummus (Vegan)", price: "10,50", desc: "Huisgemaakte hummus, gegrilde groenten en avocado." }
+  ],
+  thee: [
+    { name: "Tilly's Blend", desc: "Onze huisgemaakte zwarte thee met rozenblaadjes en vanille." },
+    { name: "Earl Grey Premium", desc: "Klassieke zwarte thee met bergamot." },
+    { name: "Verse Munt", desc: "Met honing en schijfje citroen." },
+    { name: "Gember & Citroen", desc: "Verwarmend en fris." },
+    { name: "Rooibos African Dream", desc: "Zachte rooibos met sinaasappel en kruiden." },
+    { name: "Jasmijn Parels", desc: "Groene thee met jasmijnbloesem." }
+  ]
+};
+---
+
+<!-- Modal Backdrop -->
+<div id="menu-modal" class="fixed inset-0 z-[60] hidden opacity-0 transition-opacity duration-300 pointer-events-none" role="dialog" aria-modal="true">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="modal-backdrop"></div>
+  
+  <!-- Modal ContentContainer -->
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div class="bg-brand-50 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col transform scale-95 transition-transform duration-300" id="modal-content">
+      
+      <!-- Header -->
+      <div class="bg-brand-900 text-white px-8 py-6 flex justify-between items-center shrink-0 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('/images/photo-1.webp')] bg-cover bg-center"></div>
+        <h2 class="font-display text-3xl font-bold relative z-10">Onze Menukaart</h2>
+        <button id="close-modal" class="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors relative z-10">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex border-b border-brand-200 bg-white shrink-0">
+        <button class="menu-tab flex-1 py-4 text-center font-display font-bold text-lg text-brand-900 hover:bg-brand-50 transition-colors border-b-4 border-transparent data-[active=true]:border-brand-500 data-[active=true]:bg-brand-50" data-target="hightea">High Tea</button>
+        <button class="menu-tab flex-1 py-4 text-center font-display font-bold text-lg text-brand-900 hover:bg-brand-50 transition-colors border-b-4 border-transparent data-[active=true]:border-brand-500 data-[active=true]:bg-brand-50" data-target="broodjes">Lunch & Broodjes</button>
+        <button class="menu-tab flex-1 py-4 text-center font-display font-bold text-lg text-brand-900 hover:bg-brand-50 transition-colors border-b-4 border-transparent data-[active=true]:border-brand-500 data-[active=true]:bg-brand-50" data-target="thee">Theekaart</button>
+      </div>
+
+      <!-- Scrollable Content -->
+      <div class="overflow-y-auto p-8 flex-1 bg-[url('/images/bg-pattern.png')]">
+        
+        <!-- High Tea Section -->
+        <div id="content-hightea" class="menu-section space-y-6 hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {menus.hightea.map(item => (
+              <div class="bg-white p-6 rounded-xl shadow-sm border border-brand-100 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="font-display text-xl font-bold text-brand-800">{item.name}</h3>
+                  <span class="font-bold text-brand-500">€ {item.price} p.p.</span>
+                </div>
+                <p class="text-gray-600 leading-relaxed font-body">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div class="bg-brand-100 p-4 rounded-xl text-center text-brand-800 italic">
+            * Gelieve High Tea minimaal 24 uur van tevoren te reserveren.
+          </div>
+        </div>
+
+        <!-- Lunch Section -->
+        <div id="content-broodjes" class="menu-section space-y-6 hidden">
+          <h3 class="font-display text-2xl text-brand-900 mb-4">Vers Belegde Broodjes</h3>
+          <div class="grid gap-4">
+            {menus.broodjes.map(item => (
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-brand-100 pb-4 last:border-0 hover:bg-white/50 p-2 rounded transition-colors">
+                <div>
+                  <h4 class="font-bold text-lg text-brand-800">{item.name}</h4>
+                  <p class="text-gray-600">{item.desc}</p>
+                </div>
+                <div class="text-brand-600 font-bold mt-2 sm:mt-0 whitespace-nowrap">€ {item.price}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Tea Section -->
+        <div id="content-thee" class="menu-section space-y-6 hidden">
+          <h3 class="font-display text-2xl text-brand-900 mb-4">Onze Losse Thee Selectie</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+            {menus.thee.map(item => (
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">☕</span>
+                <div>
+                  <h4 class="font-bold text-brand-800">{item.name}</h4>
+                  <p class="text-gray-600 text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('menu-modal');
+  const modalContent = document.getElementById('modal-content');
+  const closeBtn = document.getElementById('close-modal');
+  const backdrop = document.getElementById('modal-backdrop');
+  const triggers = document.querySelectorAll('.open-menu-modal'); // We will add this class to buttons
+  const tabs = document.querySelectorAll('.menu-tab');
+  const sections = document.querySelectorAll('.menu-section');
+
+  function openModal(initialTab = 'hightea') {
+    modal?.classList.remove('hidden', 'pointer-events-none');
+    // small delay to allow display:block to apply before opacity transition
+    setTimeout(() => {
+        modal?.classList.remove('opacity-0');
+        modalContent?.classList.remove('scale-95');
+        modalContent?.classList.add('scale-100');
+    }, 10);
+    switchTab(initialTab);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal?.classList.add('opacity-0');
+    modalContent?.classList.remove('scale-100');
+    modalContent?.classList.add('scale-95');
+    setTimeout(() => {
+        modal?.classList.add('hidden', 'pointer-events-none');
+        document.body.style.overflow = '';
+    }, 300);
+  }
+
+  function switchTab(targetId) {
+    // Update Tabs
+    tabs.forEach(tab => {
+        if(tab.dataset.target === targetId) {
+            tab.setAttribute('data-active', 'true');
+        } else {
+            tab.removeAttribute('data-active');
+        }
+    });
+
+    // Update Content
+    sections.forEach(section => {
+        if(section.id === `content-${targetId}`) {
+            section.classList.remove('hidden');
+            section.classList.add('animate-fade-in');
+        } else {
+            section.classList.add('hidden');
+        }
+    });
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = trigger.dataset.menuTab || 'hightea';
+        openModal(tab);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        switchTab(tab.dataset.target);
+    });
+  });
+  
+  // Expose to window immediately for manual calling if needed
+  window.openMenuModal = openModal;
+</script>
+
+<style>
+ .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+ }
+ @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+ }
+</style>

@@ -1,0 +1,77 @@
+---
+const offerings = [
+  {
+    title: "Classic High Tea",
+    price: "€ 24,50",
+    description: "Onze klassieker met diverse sandwiches, scones met clotted cream & jam, en een selectie van huisgemaakte zoetigheden.",
+    features: ["Onbeperkt thee", "Etageres vol lekkers", "2 uur genieten"],
+    color: "bg-brand-100"
+  },
+  {
+    title: "Luxury High Tea",
+    price: "€ 29,50",
+    description: "De ultieme verwennerij. Alles van de Classic, aangevuld met een glas prosecco, luxe bonbons en hartige quiches.",
+    features: ["Glas Prosecco", "Warme hartige hapjes", "Luxe bonbons"],
+    color: "bg-brand-200"
+  },
+  {
+    title: "Kids High Tea",
+    price: "€ 14,50",
+    description: "Speciaal voor de kleintjes. Limonade, zoete hapjes en sandwiches aangepast op de smaak van kinderen.",
+    features: ["Limonade in theepot", "Versierde cupcakes", "Verrassing"],
+    color: "bg-blue-50"
+  }
+];
+---
+
+<section id="hightea" class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-brand-900 mb-4">Onze High Tea's</h2>
+      <p class="font-body text-xl text-gray-600 max-w-2xl mx-auto">
+        Kies uit onze zorgvuldig samengestelde arrangementen.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {offerings.map((item, index) => (
+        <div 
+          class={`relative group p-8 rounded-3xl ${item.color} hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden animate-on-scroll`}
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <!-- Decorative Background Element -->
+          <div class="absolute -right-8 -top-8 w-32 h-32 bg-white/30 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+
+          <h3 class="font-display text-2xl font-bold text-brand-800 mb-2">{item.title}</h3>
+          <div class="text-4xl font-display font-medium text-brand-600 mb-6">{item.price} <span class="text-sm text-gray-500 font-body subpixel-antialiased font-normal">p.p.</span></div>
+          
+          <p class="font-body text-gray-700 mb-8 leading-relaxed">
+            {item.description}
+          </p>
+
+          <ul class="space-y-3 mb-8">
+            {item.features.map(feature => (
+              <li class="flex items-center text-gray-700 font-medium">
+                <svg class="w-5 h-5 text-brand-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-col gap-3">
+             <a href="#" class="open-menu-modal text-center text-sm font-bold text-brand-600 hover:text-brand-800 underline decoration-brand-200 hover:decoration-brand-500 transition-all" data-menu-tab="hightea">
+               Bekijk volledig menu
+             </a>
+             <a href="#reservation" class="inline-block w-full py-3 text-center bg-brand-900 text-white font-medium rounded-xl hover:bg-brand-700 transition-colors shadow-md">
+               Reserveer Nu
+             </a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-16 text-center">
+      <p class="text-gray-500 italic mb-4">Dieetwensen of allergieën? Laat het ons weten bij de reservering.</p>
+    </div>
+  </div>
+</section>

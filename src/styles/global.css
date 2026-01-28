@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: "Playfair Display", serif;
+    --font-body: "Outfit", sans-serif;
+
+    --color-brand-50: #fdfbf7;
+    /* Cream background */
+    --color-brand-100: #fce7e7;
+    /* Very light pink */
+    --color-brand-200: #facaca;
+    --color-brand-300: #f5a6a6;
+    --color-brand-400: #ed7d7d;
+    --color-brand-500: #e05353;
+    --color-brand-600: #c63535;
+    --color-brand-700: #a72828;
+    --color-brand-800: #8c2525;
+    --color-brand-900: #762424;
+    /* Deep red/brown */
+
+    --color-accent-gold: #c5a059;
+    --color-accent-gold-light: #e6c885;
+}
+
+/* Custom Base Styles */
+@layer base {
+    body {
+        @apply bg-brand-50 text-brand-900 font-body antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-display text-balance;
+    }
+}
+
+/* Utilities for animations */
+@layer utilities {
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-shadow-lg {
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
